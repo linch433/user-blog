@@ -20,7 +20,7 @@ module.exports = {
         'int-green': '#47E273',
       },
       fontFamily: {
-        'alegreyaSans': ['Alegreya Sans'],
+        'barlow': ['Barlow'],
       }
     },
   },

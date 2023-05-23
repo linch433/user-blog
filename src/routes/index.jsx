@@ -1,6 +1,7 @@
 import ProfilePage from '../pages/ProfilePage';
 import MainLayout from '../layout/MainLayout';
 import MainPage from '../pages/MainPage';
+import AuthPage from '../pages/AuthPage';
 import { Outlet } from 'react-router-dom';
 
 const routes = [
@@ -19,6 +20,10 @@ const routes = [
       {
         path: 'profile',
         element: <ProfilePage />,
+      },
+      {
+        path: 'auth',
+        element: <AuthPage />,
       },
     ],
   },
