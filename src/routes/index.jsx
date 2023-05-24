@@ -1,7 +1,9 @@
 import ProfilePage from '../pages/ProfilePage';
 import MainLayout from '../layout/MainLayout';
 import MainPage from '../pages/MainPage';
-import AuthPage from '../pages/AuthPage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+
 import { Outlet } from 'react-router-dom';
 
 const routes = [
@@ -22,8 +24,12 @@ const routes = [
         element: <ProfilePage />,
       },
       {
-        path: 'auth',
-        element: <AuthPage />,
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'register',
+        element: <RegisterPage />,
       },
     ],
   },
