@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,5 +9,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+html {
+    background: #c9ada7;
 }
 

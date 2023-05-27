@@ -1,44 +1,51 @@
-import {Field, Form, Formik} from 'formik';
-import {Link} from 'react-router-dom';
-import CustomInput from '../components/CustomInput';
+import {Form, Formik} from "formik";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {initialValuesForLogin} from "../features/pages/login/initialValues.js";
+import {loginValidationScheme} from "../features/pages/login/validationScheme.js";
+import HTTPService from "../features/api/api.js";
 
-const initialValuesForLogin = {
-  email: '',
-  password: ''
-}
-
-const onSubmit = () => {
-  console.log('submit click')
-}
+import SubmitButton from "../style/SubmitButton";
+import RedirectLink from "../style/RedirectLink.jsx";
+import InputField from "../style/InputField.jsx";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const onSubmit =  async (values) => {
+    const userData = {
+      email: values.email,
+      password: values.password,
+    }
+
+    try {
+        const response = await HTTPService.post('/auth', userData)
+        localStorage.setItem('AUTH_TOKEN', response.data.token);
+        HTTPService.setAuthHeader(response.data.token);
+
+        toast.success('Welcome to User-Blog');
+        navigate('/');
+     } catch {
+        toast.error('Login or password are incorrect!')
+      }
+  };
+
   return (
-    <Formik initialValues={initialValuesForLogin} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValuesForLogin}
+      validationSchema={loginValidationScheme}
+      onSubmit={onSubmit}>
       <Form>
         <div className="flex flex-row items-center justify-center">
           <div className="flex flex-col gap-5 items-center pt-5 w-full">
             <div className="text-4xl font-bold italic">USER-BLOG</div>
-            <div>Welcome to User-Blog</div>
-
-            <div className='flex flex-col w-full gap-3 px-12 md:w-1/2 lg:w-3/12'>
-              <Field as={CustomInput} name="email" placeholder="Email"/>
-              <Field as={CustomInput} name="password" placeholder="Password"/>
+            <div className='font-pacifico pt-5'>Welcome to User-Blog</div>
+            <div className="flex flex-col w-full gap-3 px-12 md:w-[50%] lg:w-[40%]">
+              <InputField name='email' placeholder='Email'/>
+              <InputField name='password' placeholder='Password'/>
             </div>
-
-            <button
-              className="bg-main-bg-light text-int-white-main px-10 py-2 rounded-xl text-xl hover:bg-secondary-bg-black "
-              type="submit"
-            >
-              Sign in
-            </button>
-
-            <div className="flex flex-row gap-2">
-              <div>New User-Blog?</div>
-              <Link to="/register" className="text-blue-900 cursor-pointer">
-                Register now!
-              </Link>
-            </div>
-
+            <SubmitButton>Sign In</SubmitButton>
+            <RedirectLink msg={'New in User-Blog?'} linkToPath={'/register'} linkTitle={'Register now!'}/>
           </div>
         </div>
       </Form>

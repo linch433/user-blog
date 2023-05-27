@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./index.html",
@@ -7,20 +8,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'main-bg-black': '#2f3e46',
-        'main-bg-light': '#52796f',
-        'secondary-bg-black': '#354f52',
-        'secondary-bg-light': '#84a98c',
-        'bg-light': '#cad2c5',
+        'main-bg-black': '#22223B',
+        'main-bg-light': '#9A8C98',
+        'secondary-bg-black': '#4A4E69',
+        'secondary-bg-light': '#C9ADA7',
+        'bg-light': '#F2E9E4',
+
         'int-white-main': '#EDF1FD',
-        'int-black-main': '#000011',
+        'int-black-main': '#081c15',
         'int-yellow': '#FFD84F',
-        'int-grapefruit': '#FF4F66',
         'int-blue-link': '#284CCC',
-        'int-green': '#47E273',
+        'int-error': '#F81818'
       },
       fontFamily: {
         'barlow': ['Barlow'],
+        'pacifico': ['Pacifico', 'cursive']
       }
     },
   },

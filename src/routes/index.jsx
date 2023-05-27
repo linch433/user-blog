@@ -1,10 +1,9 @@
+import { Outlet } from 'react-router-dom';
 import ProfilePage from '../pages/ProfilePage';
 import MainLayout from '../layout/MainLayout';
 import MainPage from '../pages/MainPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-
-import { Outlet } from 'react-router-dom';
 
 const routes = [
   {
