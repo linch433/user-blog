@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {initialValuesForRegister} from "../features/pages/register/initialValues.js";
 import {registerValidationScheme} from "../features/pages/register/validationScheme.js";
-import HTTPService from "../features/api/api.js";
+import HTTPService from "../features/api/HTTPService.js";
 import SubmitButton from "../style/SubmitButton.jsx";
 import RedirectLink from "../style/RedirectLink.jsx";
 import InputField from "../style/InputField.jsx";

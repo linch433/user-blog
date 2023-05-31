@@ -1,10 +1,10 @@
 import Header from './Header';
 import PropTypes from 'prop-types';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({children}) => {
   return (
     <div>
-      <Header />
+      <Header/>
       <div className="mt-2 text-int-black-main">{children}</div>
     </div>
   );

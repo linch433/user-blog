@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {initialValuesForLogin} from "../features/pages/login/initialValues.js";
 import {loginValidationScheme} from "../features/pages/login/validationScheme.js";
-import HTTPService from "../features/api/api.js";
+import HTTPService from "../features/api/HTTPService.js";
 
 import SubmitButton from "../style/SubmitButton";
 import RedirectLink from "../style/RedirectLink.jsx";
@@ -12,22 +12,22 @@ import InputField from "../style/InputField.jsx";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const onSubmit =  async (values) => {
+  const onSubmit = async (values) => {
     const userData = {
       email: values.email,
       password: values.password,
     }
 
     try {
-        const response = await HTTPService.post('/auth', userData)
-        localStorage.setItem('AUTH_TOKEN', response.data.token);
-        HTTPService.setAuthHeader(response.data.token);
+      const response = await HTTPService.post('/auth', userData)
+      localStorage.setItem('AUTH_TOKEN', response.data.token);
+      HTTPService.setAuthHeader(response.data.token);
 
-        toast.success('Welcome to User-Blog');
-        navigate('/');
-     } catch {
-        toast.error('Login or password are incorrect!')
-      }
+      toast.success('Welcome to User-Blog');
+      navigate('/');
+    } catch {
+      toast.error('Login or password are incorrect!')
+    }
   };
 
   return (
