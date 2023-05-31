@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {initialValuesForLogin} from "../features/pages/login/initialValues.js";
 import {loginValidationScheme} from "../features/pages/login/validationScheme.js";
-import HTTPService from "../features/api/HTTPService.js";
+import {useLoginMutation} from "../app/store/features/api.js";
 
 import SubmitButton from "../style/SubmitButton";
 import RedirectLink from "../style/RedirectLink.jsx";
@@ -11,6 +11,7 @@ import InputField from "../style/InputField.jsx";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [login] = useLoginMutation();
 
   const onSubmit = async (values) => {
     const userData = {
@@ -19,9 +20,8 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await HTTPService.post('/auth', userData)
+      const response = await login(userData);
       localStorage.setItem('AUTH_TOKEN', response.data.token);
-      HTTPService.setAuthHeader(response.data.token);
 
       toast.success('Welcome to User-Blog');
       navigate('/');

@@ -3,13 +3,14 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {initialValuesForRegister} from "../features/pages/register/initialValues.js";
 import {registerValidationScheme} from "../features/pages/register/validationScheme.js";
-import HTTPService from "../features/api/HTTPService.js";
+import {useCreateUserMutation} from "../app/store/features/users.api.js";
 import SubmitButton from "../style/SubmitButton.jsx";
 import RedirectLink from "../style/RedirectLink.jsx";
 import InputField from "../style/InputField.jsx";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [createUser] = useCreateUserMutation();
 
   const onSubmit = async (values) => {
     const registerData = {
@@ -23,7 +24,7 @@ const RegisterPage = () => {
     }
 
     try {
-      await HTTPService.post('/users', registerData);
+      await createUser(registerData);
       toast.success('Your user register successfully!');
       navigate('/login');
     } catch {

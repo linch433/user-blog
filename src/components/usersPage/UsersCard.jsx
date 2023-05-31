@@ -13,7 +13,7 @@ const UsersCard = ({user}) => {
           }
           alt='User avatar'
           loading='lazy'
-          className='w-full h-full object-cover'
+          className='w-full h-full object-cover bg-int-white-main'
         />
       </div>
 
