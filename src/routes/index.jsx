@@ -1,44 +1,44 @@
-import {Outlet} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import ProfilePage from '../pages/ProfilePage';
 import MainLayout from '../layout/MainLayout';
 import MainPage from '../pages/MainPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import PostsPage from "../pages/PostsPage.jsx";
-import UsersPage from "../pages/UsersPage.jsx";
+import PostsPage from '../pages/PostsPage.jsx';
+import UsersPage from '../pages/UsersPage.jsx';
 
 const routes = [
   {
     path: '/',
     element: (
       <MainLayout>
-        <Outlet/>
+        <Outlet />
       </MainLayout>
     ),
     children: [
       {
         path: '',
-        element: <MainPage/>,
+        element: <MainPage />,
       },
       {
         path: 'posts',
-        element: <PostsPage/>,
+        element: <PostsPage />,
       },
       {
         path: 'users',
-        element: <UsersPage/>,
+        element: <UsersPage />,
       },
       {
         path: 'profile',
-        element: <ProfilePage/>,
+        element: <ProfilePage />,
       },
       {
         path: 'login',
-        element: <LoginPage/>,
+        element: <LoginPage />,
       },
       {
         path: 'register',
-        element: <RegisterPage/>,
+        element: <RegisterPage />,
       },
     ],
   },

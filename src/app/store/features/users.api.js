@@ -1,11 +1,11 @@
-import {api} from './api.js';
+import { api } from './api.js';
 
 export const usersApi = api.injectEndpoints({
   tagTypes: ['User'],
   endpoints: builder => ({
     getUsers: builder.query({
       query: (items = 10) => `/users?limit=${items}`,
-      providesTags: ['User']
+      providesTags: ['User'],
     }),
     createUser: builder.mutation({
       query: (arg) => ({
@@ -19,14 +19,14 @@ export const usersApi = api.injectEndpoints({
       providesTags: ['User'],
     }),
     updateUserImage: builder.mutation({
-      query: ({userId, fileData}) => ({
+      query: ({ userId, fileData }) => ({
         url: `/users/upload/${userId}`,
         method: 'PUT',
-        body: fileData
+        body: fileData,
       }),
       invalidatesTags: ['User'],
     }),
   }),
 });
 
-export const {useGetUsersQuery, useCreateUserMutation, useGetMyUserInfoQuery, useUpdateUserImageMutation} = usersApi;
+export const { useGetUsersQuery, useCreateUserMutation, useGetMyUserInfoQuery, useUpdateUserImageMutation } = usersApi;

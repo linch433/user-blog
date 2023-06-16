@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {baseUrl} from "../../../features/constants/baseUrl.js";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from '../../../features/constants/baseUrl.js';
 
 export const api = createApi({
   reducerPath: 'api',
@@ -24,4 +24,4 @@ export const api = createApi({
   }),
 });
 
-export const {useLoginMutation} = api;
+export const { useLoginMutation } = api;
