@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { useGetMyUserInfoQuery, useUpdateUserImageMutation } from '../app/store/features/users.api.js';
+import {
+  useGetMyUserInfoQuery,
+  useUpdateUserImageMutation,
+  useUpdateUserInfoMutation,
+} from '../app/store/features/users.api.js';
 import { PagePreLoader } from '../style/PreLoader/PreLoader.jsx';
 import { DateFormat } from '../features/utils/dateFormat.js';
 import TextWithTitle from '../style/TextWithTitle.jsx';
@@ -16,6 +20,7 @@ const ProfilePage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const { data, isLoading, isError, error } = useGetMyUserInfoQuery();
   const [updateImage] = useUpdateUserImageMutation();
+  const [updateUserInfo] = useUpdateUserInfoMutation();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -27,8 +32,22 @@ const ProfilePage = () => {
     details: data?.details,
   };
 
-  const onSubmit = () => {
-    console.log('onSubmit callback');
+  const onSubmit = async (values) => {
+    const updatedInfo = {
+      name: values.name,
+      extra_details: values.extra_details,
+      skills: values.skills,
+      profession: values.profession,
+      details: values.details,
+    };
+
+    try {
+      await updateUserInfo({ userId: data._id, data: updatedInfo });
+      setIsModalActive(false);
+      toast.success('User info successfully updated');
+    } catch {
+      toast.error('Something went wrong');
+    }
   };
 
   const handleImageSelect = (event) => {
@@ -105,8 +124,8 @@ const ProfilePage = () => {
               <Form>
                 <div className='flex flex-row items-center justify-center'>
                   <div className='flex flex-col gap-5 items-center pt-5 w-full'>
+                    <div className='text-2xl font-semibold'>Edit user info:</div>
                     <div className='flex flex-col w-full gap-3 px-12'>
-                      <InputField name='email' placeholder='Email' />
                       <InputField name='name' placeholder='Name' />
                       <InputField name='extra_details' placeholder='Extra details' />
                       <InputField name='skills' placeholder='Skills' />
@@ -114,7 +133,7 @@ const ProfilePage = () => {
                       <InputField name='details' placeholder='Details' />
                     </div>
                     <div className='mb-4'>
-                      <SubmitButton>Update info</SubmitButton>
+                      <SubmitButton>Update</SubmitButton>
                     </div>
                   </div>
                 </div>
