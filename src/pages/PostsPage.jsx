@@ -2,15 +2,25 @@ import { useGetPostsQuery } from '../app/store/features/posts.api.js';
 import PreLoader, { PagePreLoader } from '../style/PreLoader/PreLoader.jsx';
 import PostCard from '../components/postsPage/PostCard.jsx';
 import { useState } from 'react';
+import InputField from '../style/InputField.jsx';
+import { Form } from 'formik';
+import ContentSearchBar from '../style/ContentSearchBar.jsx';
 
 const PostsPage = () => {
-  const [postsCount, setPostsCount] = useState(10);
+  const [postsCount, setPostsCount] = useState(20);
   const { data, isLoading, isFetching } = useGetPostsQuery(postsCount);
+  const [searchQuery, setSearchQuery] = useState('');
 
   if (isLoading) return <PagePreLoader />;
 
   return (
     <div className='flex flex-col justify-center items-center mt-6'>
+      <ContentSearchBar
+        type='search'
+        placeholder='Search'
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <div className='flex flex-col justify-center w-full px-4 gap-6 md:w-[50%]'>
         {data && data.data.map(post => (
           <PostCard key={post._id} post={post} />

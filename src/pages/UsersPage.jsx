@@ -4,7 +4,7 @@ import { useGetUsersQuery } from '../app/store/features/users.api.js';
 import { useState } from 'react';
 
 const UsersPage = () => {
-  const [usersCount, setUsersCount] = useState(10);
+  const [usersCount, setUsersCount] = useState(20);
   const { data, isLoading, isFetching } = useGetUsersQuery(usersCount);
 
   if (isLoading) return <PagePreLoader />;

@@ -4,7 +4,7 @@ export const usersApi = api.injectEndpoints({
   tagTypes: ['User'],
   endpoints: builder => ({
     getUsers: builder.query({
-      query: (items = 10) => `/users?limit=${items}`,
+      query: (items = 20) => `/users?limit=${items}`,
       providesTags: ['User'],
     }),
     createUser: builder.mutation({
