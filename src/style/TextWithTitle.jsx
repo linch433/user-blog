@@ -4,7 +4,7 @@ const TextWithTitle = ({ title, text }) => {
 
   if (text)
     return (
-      <div>
+      <div className='truncate'>
         <span className='font-semibold'>{title}: </span>
         {text}
       </div>

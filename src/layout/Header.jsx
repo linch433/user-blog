@@ -1,13 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMenu } from 'react-icons/io5';
 import NavigationLink from '../components/NavigationLink';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const token = window.localStorage.getItem('AUTH_TOKEN');
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogOutButtonClick = () => {
+    window.localStorage.removeItem('AUTH_TOKEN');
+    navigate('/login');
   };
 
 
@@ -21,7 +29,14 @@ const Header = () => {
           <NavigationLink path={'/users'} name={'Users'} />
           <NavigationLink path={'/posts'} name={'Posts'} />
           <NavigationLink path={'/profile'} name={'Profile'} />
-          <NavigationLink path={'/login'} name={'Join us!'} />
+          {token ?
+            (<div>
+              <button className='hover:underline' onClick={handleLogOutButtonClick}>
+                Log out
+              </button>
+            </div>) :
+            <NavigationLink path={'/login'} name={'Join us!'} />
+          }
         </div>
         <div className='flex flex-col items-center lg:hidden'>
           <IoMenu className='cursor-pointer h-8 w-auto' onClick={toggleMenuOpen} color='white' />
@@ -32,7 +47,14 @@ const Header = () => {
           <NavigationLink path={'/users'} name={'Users'} />
           <NavigationLink path={'/posts'} name={'Posts'} />
           <NavigationLink path={'/profile'} name={'Profile'} />
-          <NavigationLink path={'/login'} name={'Join us!'} />
+          {token ?
+            (<div>
+              <button className='hover:underline' onClick={handleLogOutButtonClick}>
+                Log out
+              </button>
+            </div>) :
+            <NavigationLink path={'/login'} name={'Join us!'} />
+          }
         </div>
       )}
     </>

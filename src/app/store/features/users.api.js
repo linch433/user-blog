@@ -4,8 +4,14 @@ export const usersApi = api.injectEndpoints({
   tagTypes: ['User'],
   endpoints: builder => ({
     getUsers: builder.query({
-      query: (items = 20) => `/users?limit=${items}`,
+      query: (args) => ({
+        url: `/users`,
+        params: { ...args },
+      }),
       providesTags: ['User'],
+    }),
+    getUserById: builder.query({
+      query: (userId) => `/users/${userId}`,
     }),
     createUser: builder.mutation({
       query: (arg) => ({
@@ -39,6 +45,7 @@ export const usersApi = api.injectEndpoints({
 
 export const {
   useGetUsersQuery,
+  useGetUserByIdQuery,
   useCreateUserMutation,
   useGetMyUserInfoQuery,
   useUpdateUserImageMutation,

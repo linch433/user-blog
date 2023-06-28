@@ -6,6 +6,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import PostsPage from '../pages/PostsPage.jsx';
 import UsersPage from '../pages/UsersPage.jsx';
+import PostDetailsInfo from '../pages/PostDetailsInfo.jsx';
 
 const routes = [
   {
@@ -21,12 +22,16 @@ const routes = [
         element: <MainPage />,
       },
       {
+        path: 'users',
+        element: <UsersPage />,
+      },
+      {
         path: 'posts',
         element: <PostsPage />,
       },
       {
-        path: 'users',
-        element: <UsersPage />,
+        path: 'posts/:id',
+        element: <PostDetailsInfo />,
       },
       {
         path: 'profile',

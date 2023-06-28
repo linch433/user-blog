@@ -1,15 +1,14 @@
 import { useGetPostsQuery } from '../app/store/features/posts.api.js';
+import { useState } from 'react';
 import PreLoader, { PagePreLoader } from '../style/PreLoader/PreLoader.jsx';
 import PostCard from '../components/postsPage/PostCard.jsx';
-import { useState } from 'react';
-import InputField from '../style/InputField.jsx';
-import { Form } from 'formik';
 import ContentSearchBar from '../style/ContentSearchBar.jsx';
 
 const PostsPage = () => {
   const [postsCount, setPostsCount] = useState(20);
-  const { data, isLoading, isFetching } = useGetPostsQuery(postsCount);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState();
+
+  const { data, isLoading, isFetching } = useGetPostsQuery({ limit: postsCount, search: searchQuery });
 
   if (isLoading) return <PagePreLoader />;
 
@@ -17,8 +16,9 @@ const PostsPage = () => {
     <div className='flex flex-col justify-center items-center mt-6'>
       <ContentSearchBar
         type='search'
-        placeholder='Search'
+        placeholder={`Search doesn't work`}
         value={searchQuery}
+        disabled={true}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className='flex flex-col justify-center w-full px-4 gap-6 md:w-[50%]'>
@@ -28,7 +28,7 @@ const PostsPage = () => {
       </div>
       <button
         className='bg-main-bg-light my-6 p-4 text-int-white-main font-semibold rounded-xl'
-        onClick={() => setPostsCount(postsCount + 10)}
+        onClick={() => setPostsCount(postsCount + 20)}
         disabled={isFetching}
       >
         {isFetching ? (<PreLoader />) : 'Next posts'}

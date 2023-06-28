@@ -5,7 +5,10 @@ import { useState } from 'react';
 
 const UsersPage = () => {
   const [usersCount, setUsersCount] = useState(20);
-  const { data, isLoading, isFetching } = useGetUsersQuery(usersCount);
+  const params = {
+    limit: usersCount,
+  };
+  const { data, isLoading, isFetching } = useGetUsersQuery(params);
 
   if (isLoading) return <PagePreLoader />;
 
@@ -18,7 +21,7 @@ const UsersPage = () => {
       </div>
       <button
         className='bg-main-bg-light my-6 p-4 text-int-white-main font-semibold rounded-xl'
-        onClick={() => setUsersCount(usersCount + 10)}
+        onClick={() => setUsersCount(usersCount + 20)}
         disabled={isFetching}
       >
         {isFetching ? (<PreLoader />) : 'Next users'}

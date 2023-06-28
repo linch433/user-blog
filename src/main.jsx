@@ -8,11 +8,13 @@ import { Provider } from 'react-redux';
 import { store } from './app/store/store.js';
 import { ApiProvider } from '@reduxjs/toolkit/query/react';
 import { api } from './app/store/features/api.js';
+import ScrollToTop from './hoc/ScrollToTop.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <ApiProvider api={api}>
       <BrowserRouter>
+        <ScrollToTop />
         <ToastContainer position='top-center' autoClose={3000} theme='dark' />
         <App />
       </BrowserRouter>

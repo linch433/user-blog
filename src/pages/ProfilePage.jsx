@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
   const { initialValues } = ProfileInitialValues({ data });
 
-  const onSubmit = async (values) => {
+  const onSubmit = (values) => {
     const updatedInfo = {
       name: values.name,
       extra_details: values.extra_details,
@@ -32,13 +32,10 @@ const ProfilePage = () => {
       details: values.details,
     };
 
-    try {
-      await updateUserInfo({ userId: data._id, data: updatedInfo });
-      setIsModalActive(false);
-      toast.success('User info successfully updated');
-    } catch {
-      toast.error('Something went wrong');
-    }
+    updateUserInfo({ userId: data._id, data: updatedInfo })
+      .unwrap()
+      .then(() => toast.success('User info successfully updated'))
+      .catch(() => toast.error('Something went wrong'));
   };
 
   const handleImageSelect = (event) => {
@@ -46,19 +43,17 @@ const ProfilePage = () => {
     setSelectedImage(file);
   };
 
-  const handleImageUpload = async () => {
+  const handleImageUpload = () => {
     if (!selectedImage) {
       return;
     }
     const formData = new FormData();
     formData.append('avatar', selectedImage);
 
-    try {
-      await updateImage({ userId: data._id, fileData: formData });
-      toast.success('Your image avatar has been updated successfully!');
-    } catch {
-      toast.error('Sorry, something went wrong');
-    }
+    updateImage({ userId: data._id, fileData: formData })
+      .unwrap()
+      .then(() => toast.success('Image updated successfully!'))
+      .catch((error) => toast.error(error.data.error.message));
   };
 
   return (
@@ -69,7 +64,7 @@ const ProfilePage = () => {
         isFetching={isFetching}
         isLoading={isLoading}
       >
-        {data && !isError && (
+        {data && (
           <>
             <div className='flex flex-col justify-center items-center gap-4 mt-6 md:flex-row md:gap-10'>
               <div className='w-3/4 px-4 md:w-96'>
