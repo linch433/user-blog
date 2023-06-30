@@ -36,7 +36,8 @@ const RegisterPage = () => {
     <Formik
       initialValues={initialValuesForRegister}
       validationSchema={registerValidationScheme}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       <Form>
         <div className='flex flex-row items-center justify-center'>
           <div className='flex flex-col gap-5 items-center pt-5 w-full'>
@@ -52,7 +53,11 @@ const RegisterPage = () => {
               <InputField name='details' placeholder='Details' />
             </div>
             <SubmitButton>Sign Up</SubmitButton>
-            <RedirectLink msg={'Already in User-Blog?'} linkToPath={'/login'} linkTitle={'Login now!'} />
+            <RedirectLink
+              msg={'Already in User-Blog?'}
+              linkToPath={'/login'}
+              linkTitle={'Login now!'}
+            />
           </div>
         </div>
       </Form>

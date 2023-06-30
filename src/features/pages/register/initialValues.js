@@ -5,5 +5,5 @@ export const initialValuesForRegister = {
   extra_details: '',
   skills: '',
   profession: '',
-  details: ''
-}
+  details: '',
+};

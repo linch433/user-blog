@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 const TextWithTitle = ({ title, text }) => {
-
   if (text)
     return (
       <div className='truncate'>

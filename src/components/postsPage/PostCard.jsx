@@ -37,13 +37,13 @@ const PostCard = ({ post }) => {
         <div>{DateFormat.getFormatDate(dateCreated)}</div>
       </div>
       <div className='flex justify-center'>
-        {image &&
+        {image && (
           <img
             src={`http://test-blog-api.ficuslife.com${image}`}
             alt='Post image'
             className='pt-10 w-[75%]'
           />
-        }
+        )}
       </div>
       <div className='flex flex-row gap-1 items-center mt-4'>
         <div onClick={(e) => e.stopPropagation()}>
@@ -62,6 +62,5 @@ const PostCard = ({ post }) => {
 PostCard.propTypes = {
   post: PropTypes.object,
 };
-
 
 export default PostCard;

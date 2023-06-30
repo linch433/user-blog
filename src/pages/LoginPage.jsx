@@ -34,7 +34,8 @@ const LoginPage = () => {
     <Formik
       initialValues={initialValuesForLogin}
       validationSchema={loginValidationScheme}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       <Form>
         <div className='flex flex-row items-center justify-center'>
           <div className='flex flex-col gap-5 items-center pt-5 w-full'>
@@ -45,7 +46,11 @@ const LoginPage = () => {
               <InputField name='password' placeholder='Password' />
             </div>
             <SubmitButton>Sign In</SubmitButton>
-            <RedirectLink msg={'New in User-Blog?'} linkToPath={'/register'} linkTitle={'Register now!'} />
+            <RedirectLink
+              msg={'New in User-Blog?'}
+              linkToPath={'/register'}
+              linkTitle={'Register now!'}
+            />
           </div>
         </div>
       </Form>

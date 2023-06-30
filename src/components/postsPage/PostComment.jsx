@@ -10,9 +10,14 @@ const PostComment = ({ comment }) => {
   console.log(_id, followedCommentID);
 
   return (
-    <div key={_id} className='flex w-[80%] flex-col bg-main-bg-light mb-4 rounded-lg px-4 py-2 md:w-[45%]'>
+    <div
+      key={_id}
+      className='flex w-[80%] flex-col bg-main-bg-light mb-4 rounded-lg px-4 py-2 md:w-[45%]'
+    >
       <div className='flex flex-row justify-between'>
-        <div className='font-semibold text-xl truncate'>{!isError ? user?.name : 'Deleted user'}</div>
+        <div className='font-semibold text-xl truncate'>
+          {!isError ? user?.name : 'Deleted user'}
+        </div>
         <div>{DateFormat.getFormatDate(dateCreated)}</div>
       </div>
       <div className='max-w-md'>

@@ -8,7 +8,10 @@ const PostsPage = () => {
   const [postsCount, setPostsCount] = useState(20);
   const [searchQuery, setSearchQuery] = useState();
 
-  const { data, isLoading, isFetching } = useGetPostsQuery({ limit: postsCount, search: searchQuery });
+  const { data, isLoading, isFetching } = useGetPostsQuery({
+    limit: postsCount,
+    search: searchQuery,
+  });
 
   if (isLoading) return <PagePreLoader />;
 
@@ -22,16 +25,14 @@ const PostsPage = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className='flex flex-col justify-center w-full px-4 gap-6 md:w-[50%]'>
-        {data && data.data.map(post => (
-          <PostCard key={post._id} post={post} />
-        ))}
+        {data && data.data.map((post) => <PostCard key={post._id} post={post} />)}
       </div>
       <button
         className='bg-main-bg-light my-6 p-4 text-int-white-main font-semibold rounded-xl'
         onClick={() => setPostsCount(postsCount + 20)}
         disabled={isFetching}
       >
-        {isFetching ? (<PreLoader />) : 'Next posts'}
+        {isFetching ? <PreLoader /> : 'Next posts'}
       </button>
     </div>
   );

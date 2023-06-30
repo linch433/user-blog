@@ -18,7 +18,6 @@ const Header = () => {
     navigate('/login');
   };
 
-
   return (
     <>
       <div className='flex h-16 items-center justify-between text-int-white-main bg-secondary-bg-black px-10'>
@@ -29,14 +28,15 @@ const Header = () => {
           <NavigationLink path={'/users'} name={'Users'} />
           <NavigationLink path={'/posts'} name={'Posts'} />
           <NavigationLink path={'/profile'} name={'Profile'} />
-          {token ?
-            (<div>
+          {token ? (
+            <div>
               <button className='hover:underline' onClick={handleLogOutButtonClick}>
                 Log out
               </button>
-            </div>) :
+            </div>
+          ) : (
             <NavigationLink path={'/login'} name={'Join us!'} />
-          }
+          )}
         </div>
         <div className='flex flex-col items-center lg:hidden'>
           <IoMenu className='cursor-pointer h-8 w-auto' onClick={toggleMenuOpen} color='white' />
@@ -47,14 +47,15 @@ const Header = () => {
           <NavigationLink path={'/users'} name={'Users'} />
           <NavigationLink path={'/posts'} name={'Posts'} />
           <NavigationLink path={'/profile'} name={'Profile'} />
-          {token ?
-            (<div>
+          {token ? (
+            <div>
               <button className='hover:underline' onClick={handleLogOutButtonClick}>
                 Log out
               </button>
-            </div>) :
+            </div>
+          ) : (
             <NavigationLink path={'/login'} name={'Join us!'} />
-          }
+          )}
         </div>
       )}
     </>

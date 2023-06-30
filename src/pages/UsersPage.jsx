@@ -15,16 +15,14 @@ const UsersPage = () => {
   return (
     <div className='flex flex-col items-center justify-center mt-6'>
       <div className='flex flex-wrap justify-center w-full gap-6 md:w-[75%]'>
-        {data && data.data.map(user => (
-          <UsersCard key={user._id} user={user} />
-        ))}
+        {data && data.data.map((user) => <UsersCard key={user._id} user={user} />)}
       </div>
       <button
         className='bg-main-bg-light my-6 p-4 text-int-white-main font-semibold rounded-xl'
         onClick={() => setUsersCount(usersCount + 20)}
         disabled={isFetching}
       >
-        {isFetching ? (<PreLoader />) : 'Next users'}
+        {isFetching ? <PreLoader /> : 'Next users'}
       </button>
     </div>
   );

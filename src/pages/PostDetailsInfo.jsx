@@ -24,19 +24,23 @@ const PostDetailsInfo = () => {
         </div>
       </div>
       <div className='flex justify-center w-[80%] md:w-[45%]'>
-        {image &&
+        {image && (
           <img
             src={`http://test-blog-api.ficuslife.com${image}`}
             alt='Post image'
             className='pt-4 w-full'
           />
-        }
+        )}
       </div>
-      <DataStatusChecker isError={isError} error={error} isFetching={isFetching} isLoading={isLoading}>
+      <DataStatusChecker
+        isError={isError}
+        error={error}
+        isFetching={isFetching}
+        isLoading={isLoading}
+      >
         <div className='flex flex-col w-full items-center mt-8'>
-          {commentsData && commentsData.map((comment) => (
-            <PostComment key={comment._id} comment={comment} />
-          ))}
+          {commentsData &&
+            commentsData.map((comment) => <PostComment key={comment._id} comment={comment} />)}
         </div>
       </DataStatusChecker>
     </div>

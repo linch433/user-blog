@@ -78,11 +78,17 @@ const ProfilePage = () => {
                 <TextWithTitle text={data.skills} title='Skills' />
                 <TextWithTitle text={data.profession} title='Profession' />
                 <TextWithTitle text={data.details} title='Details' />
-                <TextWithTitle text={DateFormat.getFormatDate(data.dateCreated)} title='Date created' />
+                <TextWithTitle
+                  text={DateFormat.getFormatDate(data.dateCreated)}
+                  title='Date created'
+                />
               </div>
             </div>
             <div className='flex flex-col gap-4 md:flex-row mt-6'>
-              <ImageInput handleImageSelect={handleImageSelect} handleImageUpload={handleImageUpload} />
+              <ImageInput
+                handleImageSelect={handleImageSelect}
+                handleImageUpload={handleImageUpload}
+              />
               <UpdateInfoModalView
                 setIsModalActive={setIsModalActive}
                 initialValues={initialValues}

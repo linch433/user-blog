@@ -1,10 +1,7 @@
 import * as yup from 'yup';
 
 export const registerValidationScheme = yup.object({
-  email: yup
-    .string()
-    .email('Invalid email address')
-    .required('Required'),
+  email: yup.string().email('Invalid email address').required('Required'),
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters or over')
@@ -14,4 +11,4 @@ export const registerValidationScheme = yup.object({
   skills: yup.string(),
   profession: yup.string(),
   details: yup.string(),
-})
+});

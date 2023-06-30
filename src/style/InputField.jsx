@@ -8,7 +8,7 @@ const InputField = ({ name, placeholder }) => {
     <div>
       <Field as={CustomInput} name={name} placeholder={placeholder} />
       <ErrorMessage name={name}>
-        {msg => <div className='text-int-error'>{msg}</div>}
+        {(msg) => <div className='text-int-error'>{msg}</div>}
       </ErrorMessage>
     </div>
   );

@@ -13,10 +13,7 @@ const UpdateInfoModalView = ({ isModalActive, setIsModalActive, initialValues, o
         active={isModalActive}
         closeModal={() => setIsModalActive(false)}
       >
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-        >
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
           <Form>
             <div className='flex flex-row items-center justify-center'>
               <div className='flex flex-col gap-5 items-center pt-5 w-full'>

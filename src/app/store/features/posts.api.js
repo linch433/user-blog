@@ -2,7 +2,7 @@ import { api } from './api.js';
 
 export const postsApi = api.injectEndpoints({
   tagTypes: ['Posts'],
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getPosts: builder.query({
       query: (args) => ({
         url: `/posts`,

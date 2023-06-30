@@ -2,7 +2,7 @@ import { api } from './api.js';
 
 export const usersApi = api.injectEndpoints({
   tagTypes: ['User'],
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getUsers: builder.query({
       query: (args) => ({
         url: `/users`,
