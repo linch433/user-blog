@@ -1,10 +1,14 @@
-import { useGetPostsQuery } from '../app/store/features/posts.api.js';
+import { useCreatePostMutation, useGetPostsQuery } from '../app/store/features/posts.api.js';
 import { useState } from 'react';
 import PreLoader, { PagePreLoader } from '../style/PreLoader/PreLoader.jsx';
 import PostCard from '../components/postsPage/PostCard.jsx';
 import ContentSearchBar from '../style/ContentSearchBar.jsx';
+import CreatePostModalView from '../components/postsPage/CreatePostModalView.jsx';
+import { initialValuesToCreateNewPost } from '../features/pages/posts/initialValues.js';
+import { toast } from 'react-toastify';
 
 const PostsPage = () => {
+  const [isModalActive, setIsModalActive] = useState(false);
   const [postsCount, setPostsCount] = useState(20);
   const [searchQuery, setSearchQuery] = useState();
 
@@ -12,6 +16,21 @@ const PostsPage = () => {
     limit: postsCount,
     search: searchQuery,
   });
+  const [createNewPost] = useCreatePostMutation();
+
+  const onSubmit = (values) => {
+    const postData = {
+      title: values.title,
+      fullText: values.fullText,
+      description: values.description,
+    };
+
+    createNewPost(postData)
+      .unwrap()
+      .then(() => toast.success('Your post created successfully!'))
+      .then(() => setIsModalActive(false))
+      .catch((error) => toast.error(error?.data.error[0].message));
+  };
 
   if (isLoading) return <PagePreLoader />;
 
@@ -24,6 +43,18 @@ const PostsPage = () => {
         disabled={true}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+      <CreatePostModalView
+        setIsModalActive={setIsModalActive}
+        isModalActive={isModalActive}
+        onSubmit={onSubmit}
+        initialValues={initialValuesToCreateNewPost}
+      />
+      <button
+        className='bg-main-bg-light px-8 py-4 text-int-white-main font-semibold rounded-xl hover:bg-secondary-bg-black transition duration-300 ease-in-out shadow-xl mb-6'
+        onClick={() => setIsModalActive(true)}
+      >
+        Create a new post
+      </button>
       <div className='flex flex-col justify-center w-full px-4 gap-6 md:w-[50%]'>
         {data && data.data.map((post) => <PostCard key={post._id} post={post} />)}
       </div>

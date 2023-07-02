@@ -38,6 +38,10 @@ const routes = [
         element: <ProfilePage />,
       },
       {
+        path: 'profile/posts/:id',
+        element: <PostDetailsInfo />,
+      },
+      {
         path: 'login',
         element: <LoginPage />,
       },

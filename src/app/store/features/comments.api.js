@@ -9,7 +9,26 @@ export const commentsApi = api.injectEndpoints({
       }),
       providesTags: ['Comments'],
     }),
+    createCommentByPostId: builder.mutation({
+      query: ({ postId, data }) => ({
+        url: `/comments/post/${postId}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Comments'],
+    }),
+    putCommentLikeById: builder.mutation({
+      query: (commentId) => ({
+        url: `/comments/like/${commentId}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Comments'],
+    }),
   }),
 });
 
-export const { useGetCommentsQuery } = commentsApi;
+export const {
+  useGetCommentsQuery,
+  usePutCommentLikeByIdMutation,
+  useCreateCommentByPostIdMutation,
+} = commentsApi;

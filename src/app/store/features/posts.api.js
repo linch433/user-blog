@@ -16,6 +16,7 @@ export const postsApi = api.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Posts'],
     }),
     getPostById: builder.query({
       query: (postId) => `/posts/${postId}`,

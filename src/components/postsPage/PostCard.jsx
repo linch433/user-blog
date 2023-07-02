@@ -6,23 +6,25 @@ import { useSetLikeForPostByIdMutation } from '../../app/store/features/posts.ap
 import { useGetUserByIdQuery } from '../../app/store/features/users.api.js';
 import { DateFormat } from '../../features/utils/dateFormat.js';
 import TextWithTitle from '../../style/TextWithTitle.jsx';
+import { useCallback } from 'react';
 
 const PostCard = ({ post }) => {
-  const { title, fullText, description, dateCreated, image, likes, postedBy } = post;
+  const { _id, title, fullText, description, dateCreated, image, likes, postedBy } = post;
 
   const { data: user } = useGetUserByIdQuery(postedBy);
   const [setLikeForPost] = useSetLikeForPostByIdMutation();
+
   const navigate = useNavigate();
 
   const navigateToPostById = () => {
-    navigate(`${post._id}`, { state: { postInfo: post, userName: user?.name } });
+    navigate(`${post._id}`, { state: { postId: _id, userName: user?.name } });
   };
 
-  const handleLikeButtonClick = () => {
-    setLikeForPost(post._id)
+  const handleLikeButtonClick = useCallback((postId) => {
+    setLikeForPost(postId)
       .unwrap()
-      .catch((error) => toast.error(error.data.error));
-  };
+      .catch((error) => toast.error(error?.data.error));
+  }, []);
 
   return (
     <div
@@ -33,7 +35,6 @@ const PostCard = ({ post }) => {
         <TextWithTitle title='Title' text={title} />
         <TextWithTitle title='Full text' text={fullText} />
         <TextWithTitle title='Description' text={description} />
-        {/*<TextWithTitle title='Posted by' text={user?.name} />*/}
         <div>{DateFormat.getFormatDate(dateCreated)}</div>
       </div>
       <div className='flex justify-center'>
@@ -50,7 +51,7 @@ const PostCard = ({ post }) => {
           <AiFillLike
             className='cursor-pointer'
             size='20'
-            onClick={() => handleLikeButtonClick()}
+            onClick={() => handleLikeButtonClick(post._id)}
           />
         </div>
         {likes.length}

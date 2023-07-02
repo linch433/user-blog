@@ -12,6 +12,7 @@ import ImageInput from '../components/profilePage/ImageInput.jsx';
 import UpdateInfoModalView from '../components/profilePage/UpdateInfoModalView.jsx';
 import ProfileInitialValues from '../features/pages/profile/initialValues.js';
 import DataStatusChecker from '../components/profilePage/DataStatusChecker.jsx';
+import PostsByUser from '../components/profilePage/PostsByUser.jsx';
 
 const ProfilePage = () => {
   const [isModalActive, setIsModalActive] = useState(false);
@@ -101,6 +102,10 @@ const ProfilePage = () => {
               >
                 Edit Info
               </button>
+            </div>
+            <div className='mt-4'>
+              <div className='text-2xl font-bold text-center mb-2'>Posts by User</div>
+              <PostsByUser userId={data._id} userName={data.name} />
             </div>
           </>
         )}

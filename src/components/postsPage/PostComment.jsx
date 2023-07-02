@@ -2,12 +2,21 @@ import PropTypes from 'prop-types';
 import { DateFormat } from '../../features/utils/dateFormat.js';
 import { useGetUserByIdQuery } from '../../app/store/features/users.api.js';
 import { AiFillHeart } from 'react-icons/ai';
+import { useCallback } from 'react';
+import { toast } from 'react-toastify';
+import { usePutCommentLikeByIdMutation } from '../../app/store/features/comments.api.js';
 
 const PostComment = ({ comment }) => {
-  const { _id, commentedBy, followedCommentID, text, dateCreated, likes } = comment;
-  const { data: user, isError } = useGetUserByIdQuery(commentedBy);
+  const { _id, commentedBy, text, dateCreated, likes } = comment;
 
-  console.log(_id, followedCommentID);
+  const { data: user, isError } = useGetUserByIdQuery(commentedBy);
+  const [setLikeForComment] = usePutCommentLikeByIdMutation();
+
+  const handleLikeCommentClick = useCallback((commentId) => {
+    setLikeForComment(commentId)
+      .unwrap()
+      .catch(() => toast.error('Something went wrong'));
+  }, []);
 
   return (
     <div
@@ -24,7 +33,12 @@ const PostComment = ({ comment }) => {
         <div className='truncate'>{text}</div>
       </div>
       <div className='flex flex-row items-center gap-0.5 mt-4'>
-        <AiFillHeart className='cursor-pointer' size='20' /> {likes.length}
+        <AiFillHeart
+          className='cursor-pointer'
+          size='20'
+          onClick={() => handleLikeCommentClick(_id)}
+        />
+        {likes.length}
       </div>
     </div>
   );
