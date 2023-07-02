@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 import { useDeletePostByIdMutation, useGetPostsQuery } from '../../app/store/features/posts.api';
 import { PropTypes } from 'prop-types';
-import PreLoader from '../../style/PreLoader/PreLoader';
+import PreLoader, { PagePreLoader } from '../../style/PreLoader/PreLoader';
 import { DateFormat } from './../../features/utils/dateFormat';
 import { AiFillHeart } from 'react-icons/ai';
 import TextWithTitle from '../../style/TextWithTitle';
@@ -26,7 +26,12 @@ const PostsByUser = ({ userId, userName }) => {
     navigate(`posts/${postId}`, { state: { postId: postId, userName: userName } });
   }, []);
 
-  if (isLoading) return <PreLoader />;
+  if (isLoading)
+    return (
+      <div className='flex justify-center'>
+        <PreLoader />
+      </div>
+    );
 
   return (
     <div className='flex flex-col w-screen items-center'>

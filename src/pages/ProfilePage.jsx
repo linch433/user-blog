@@ -104,7 +104,7 @@ const ProfilePage = () => {
               </button>
             </div>
             <div className='mt-4'>
-              <div className='text-2xl font-bold text-center mb-2'>Posts by User</div>
+              <div className='text-2xl font-bold text-center mb-2'>Your posts</div>
               <PostsByUser userId={data._id} userName={data.name} />
             </div>
           </>
