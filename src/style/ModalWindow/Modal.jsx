@@ -23,8 +23,8 @@ function Modal({
             className={
               isSidePanel
                 ? `bg-[#fafafa] h-screen w-[50vw] absolute right-0 overflow-auto`
-                : `bg-white ${width} ${height} ${roundStyle ? roundStyle : 'rounded-2xl'} 
-                                        shadow shadow-int-blue-link`
+                : `bg-white md:${width} ${height} ${roundStyle ? roundStyle : 'rounded-2xl'} 
+                                        shadow shadow-int-blue-link w-[95%]`
             }
             style={{ animation: `${isSidePanel ? 'modalSlide 0.5s ease-out' : ''}` }}
           >
