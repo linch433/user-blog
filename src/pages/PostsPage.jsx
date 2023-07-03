@@ -1,5 +1,5 @@
 import { useCreatePostMutation, useGetPostsQuery } from '../app/store/features/posts.api.js';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import PreLoader, { PagePreLoader } from '../style/PreLoader/PreLoader.jsx';
 import PostCard from '../components/postsPage/PostCard.jsx';
 import ContentSearchBar from '../style/ContentSearchBar.jsx';
@@ -18,7 +18,7 @@ const PostsPage = () => {
   });
   const [createNewPost] = useCreatePostMutation();
 
-  const onSubmit = (values) => {
+  const onSubmit = useCallback((values, { resetForm }) => {
     const postData = {
       title: values.title,
       fullText: values.fullText,
@@ -30,7 +30,9 @@ const PostsPage = () => {
       .then(() => toast.success('Your post created successfully!'))
       .then(() => setIsModalActive(false))
       .catch((error) => toast.error(error?.data.error[0].message));
-  };
+
+    resetForm();
+  }, []);
 
   if (isLoading) return <PagePreLoader />;
 

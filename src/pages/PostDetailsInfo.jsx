@@ -22,7 +22,7 @@ const PostDetailsInfo = () => {
   const { data: commentsData, isLoading: commentLoading } = useGetCommentsQuery(postId);
   const [createCommentById] = useCreateCommentByPostIdMutation();
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, { resetForm }) => {
     const commentData = {
       text: values.text,
       followedCommentID: null,
@@ -32,6 +32,8 @@ const PostDetailsInfo = () => {
       .unwrap()
       .then((response) => console.log(response))
       .catch((error) => console.warn(error));
+
+    resetForm();
   };
 
   if (postLoading && commentLoading) return <PagePreLoader />;
