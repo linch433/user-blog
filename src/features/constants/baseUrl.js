@@ -1,1 +1,1 @@
-export const baseUrl = 'http://test-blog-api.ficuslife.com/api/v1';
+export const baseUrl = import.meta.env.VITE_APP_API_URL;
